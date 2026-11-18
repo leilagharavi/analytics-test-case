@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: user_features
+    description: "User-level aggregated feature table built from GA4 staging events, optimized for BQML and user behavior analytics."
+    columns:
+      - name: user_pseudo_id
+        description: "Primary key: Unique pseudo identifier for each user."
+        tests:
+          - unique
+          - not_null
+          
+      - name: total_sessions
+        description: "Total distinct sessions initiated by the user."
+        tests:
+          - not_null
+          
+      - name: label_made_purchase
+        description: "Binary target label for BQML: 1 if the user purchased, 0 otherwise."
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0, 1]
+              quote: false
